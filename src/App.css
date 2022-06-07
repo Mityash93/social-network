@@ -1,0 +1,38 @@
+
+.app-wrapper {
+  display: grid;
+  grid-template-areas: 'header header' 'navbar content';
+  grid-template-rows: 50px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 5px;
+  margin: 0 auto;
+  width: 1200px;
+}
+
+.Header {
+  grid-area: header;
+  background: rgb(250, 248, 248);
+  border-radius: 10px;
+}
+
+.Header img {
+  width: 50px;
+}
+
+.Navbar {
+  grid-area: navbar;
+  border-radius: 20px;
+  background: rgb(242, 255, 253);
+}
+
+.Content {
+  grid-area: content;
+  border-radius: 30px;
+}
+
+.Content img{
+  width: 1000px;
+  height: 400px;
+  border-radius: 10px;
+}
+

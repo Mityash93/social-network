@@ -1,8 +1,9 @@
 import React from 'react'
+import classes from './Navbar.module.css'
 
 export default function Navbar() {
   return (
-    <div className="Navbar">
+    <nav className={classes.Navbar}>
       <div>
           <a href='/'>Profile</a>
       </div>
@@ -22,6 +23,6 @@ export default function Navbar() {
       <div>
           <a href='/'>Settings</a>
       </div>
-    </div>
+    </nav>
   )
 }

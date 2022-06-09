@@ -1,0 +1,11 @@
+.Dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    background-color: rgb(243, 236, 227);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.Dialog .active {
+    color: blue;
+}

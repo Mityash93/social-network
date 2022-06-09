@@ -2,9 +2,15 @@
     grid-area: navbar;
     border-radius: 20px;
     background: rgb(242, 255, 253);
+    padding: 10px 30px 30px 30px;
   }
 
-  .Navbar a {
+  .item a {
     text-decoration: none;
     color: black;
+    
+  }
+
+  .item a.active {
+    color: rgb(88, 168, 72)
   }

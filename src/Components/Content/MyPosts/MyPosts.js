@@ -1,19 +1,22 @@
 import React from "react";
-import classes from './MyPosts.module.css'
+import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 export default function MyPosts() {
   return (
-    <di className={classes.item}>
-      <div>My posts</div>
+    <div className={classes.item}>
+      <h3>My posts</h3>
       <div>
+        <div>
           <textarea></textarea>
+          <hr />
+        </div>
+        <div>
           <button>Add post</button>
+        </div>
       </div>
-      <Post/>
-      <Post/>
-      <Post/>
-      <Post/>
-    </di>
+      <Post />
+      <Post />
+    </div>
   );
 }

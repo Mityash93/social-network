@@ -1,3 +1,7 @@
 .item {
     padding: 10px;
 }
+
+.item button {
+    margin-bottom: 10px;
+}

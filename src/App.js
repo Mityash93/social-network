@@ -12,24 +12,27 @@ function App(props) {
       <div className="app-wrapper">
         <Header />
         <Navbar
-          avas={props.state.NavBar.FriendsAvas}
-          names={props.state.NavBar.FriendsNames}
+        // avas={props.state.NavBar.FriendsAvas}
+        // names={props.state.NavBar.FriendsNames}
         />
         <div className="app-wrapper-content">
           <Routes>
             <Route
               exact
               path="/"
-              element={<Content Posts={props.state.PostsPage.Posts} />}
+              element={
+                <Content
+                  Posts={props.state.PostsPage.Posts}
+                  NewPostText={props.state.PostsPage.NewPostText}
+                  dispatch={props.dispatch}
+                />
+              }
             />
             <Route
               exact
               path="/messages/*"
               element={
-                <Dialogs
-                  Dialogs={props.state.MessagePage.Dialogs}
-                  Messages={props.state.MessagePage.Messages}
-                />
+                <Dialogs store={props.store} dispatch={props.dispatch} />
               }
             />
           </Routes>

@@ -4,10 +4,11 @@ import MyPosts from '../Content/MyPosts/MyPosts'
 import ContentInfo from "./ContentInfo/ContentInfo";
 
 export default function Content(props) {
+  
   return (
     <div className={classes.Content}>
         <ContentInfo />
-        <MyPosts Posts={props.Posts} />
+        <MyPosts Posts={props.Posts} NewPostText={props.NewPostText} dispatch={props.dispatch} />
     </div>
   );
 }

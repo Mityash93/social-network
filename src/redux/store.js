@@ -1,7 +1,7 @@
-const addPost = "ADD-POST";
-const updateNewPostText = "UPDATE-NEW-POST-TEXT";
-const updateNewMessageBody = "UPDATE-NEW-MESSAGE-BODY";
-const sendMessage = "SEND-MESSAGE";
+import messageReducer from "./messageReducer";
+import navBarReducer from "./navBarReducer";
+import postsReducer from "./postsReducer";
+
 
 const store = {
   _state: {
@@ -26,10 +26,10 @@ const store = {
       ],
       NewPostText: "dima",
     },
-    // NavBar: {
-    //   FriendsAvas: [],
-    //   FriendsNames: ["Камилла", "Денис"],
-    // },
+    NavBar: {
+      // FriendsAvas: [],
+      // FriendsNames: ["Камилла", "Денис"],
+    },
   },
   _callSubscriber() {},
 
@@ -59,53 +59,16 @@ const store = {
   //   this._state._callSubscriber(this._state);
   // },
   dispatch(action) {
-    // type: 'ADD-MESSAFE' for example
+    
+    this._state.PostsPage = postsReducer(this._state.PostsPage, action);
+    this._state.MessagePage = messageReducer(this._state.MessagePage, action);
+    this._state.NavBar = navBarReducer(this._state.NavBar, action);
 
-    if (action.type === "ADD-POST") {
-      const newPost = {
-        id: 3,
-        message: this._state.PostsPage.NewPostText,
-        likesCount: 0,
-      };
-      this._state.PostsPage.Posts.push(newPost);
-      this._state.PostsPage.NewPostText = "";
-      this._state._callSubscriber(this._state);
-    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-      this._state.PostsPage.NewPostText = action.newText;
-      this._state._callSubscriber(this._state);
-    } else if (action.type === updateNewMessageBody) {
-      this._state.MessagePage.newMessageBody = action.body;
-      this._state._callSubscriber(this._state);
-    } else if (action.type === sendMessage) {
-      const body = this._state.MessagePage.newMessageBody;
-      this._state.MessagePage.Messages.push({ id: 4, message: body });
-      this._state.MessagePage.newMessageBody = "";
-      this._state._callSubscriber(this._state);
-    }
+    this._state._callSubscriber(this._state);
   },
 };
 
-export const addPostActionCreator = () => {
-  return {
-    type: addPost,
-  };
-};
-export const updateNewTextActionCreator = (text) => {
-  return {
-    type: updateNewPostText,
-    newText: text,
-  };
-};
-export const sendMessageCreator = () => {
-  return {
-    type: sendMessage,
-  };
-};
-export const updateNewMessageBodyCreator = (body) => {
-  return {
-    type: updateNewMessageBody,
-    body: body,
-  };
-};
+
+
 
 export default store;

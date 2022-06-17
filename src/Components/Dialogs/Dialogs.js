@@ -4,6 +4,7 @@ import classes from "./Dialogs.module.css";
 import Message from "./Message/Message";
 
 export default function Dialogs(props) {
+
   const state = props.MessagePage;
 
   const newMessageBody = state.newMessageBody;
@@ -18,15 +19,15 @@ export default function Dialogs(props) {
   return (
     <div className={classes.Dialogs}>
       <div className={classes.Dialog}>
-        {state.Dialogs.map((dialog, index) => (
-          <DialogItem key={index} name={dialog.name} id={dialog.id} />
+        {state.Dialogs.map((dialog) => (
+          <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} />
         ))}
       </div>
 
       <div className={classes.Messages}>
         <div>
-          {state.Messages.map((message, index) => (
-            <Message key={index} message={message.message} />
+          {state.Messages.map((message) => (
+            <Message key={message.id} message={message.message} />
           ))}
         </div>
         <div>

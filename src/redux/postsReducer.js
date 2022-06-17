@@ -18,12 +18,16 @@ const postsReducer = (state = initialState, action) => {
         message: state.NewPostText,
         likesCount: 0,
       };
-      state.Posts.push(newPost);
-      state.NewPostText = "";
-      return state;
+      return {
+        ...state,
+        Posts: [...state.Posts, newPost],
+        NewPostText: ""
+      }
     case updateNewPostText:
-      state.NewPostText = action.newText;
-      return state;
+      return {
+        ...state,
+        NewPostText: action.newText
+      }
     default:
       return state;
   }

@@ -30,8 +30,8 @@ export default function MyPosts(props) {
         </div>
       </div>
 
-      {props.posts.map((post, index) => (
-        <Post key={index} message={post.message} likesCount={post.likesCount} />
+      {props.posts.map((post) => (
+        <Post key={post.id} message={post.message} likesCount={post.likesCount} />
       ))}
     </div>
   );

@@ -5,6 +5,7 @@ import Content from "./Components/Content/Content";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import Header from "./Components/Header/Header";
 import Navbar from "./Components/Navbar/Navbar";
+import UsersContainer from "./Components/Users/UsersContainer";
 
 function App(props) {
   return (
@@ -20,6 +21,7 @@ function App(props) {
               path="/messages/*"
               element={<DialogsContainer store={props.store} />}
             />
+            <Route exact path="/users/*" element={<UsersContainer />} />
           </Routes>
         </div>
       </div>

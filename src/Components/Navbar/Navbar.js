@@ -1,29 +1,33 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import classes from './Navbar.module.css'
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import classes from "./Navbar.module.css";
 
 export default function Navbar(props) {
+  const onNavLink = (url, item) => (
+    <NavLink
+      as={Link}
+      to={url}
+      className={(handlerActive) =>
+        handlerActive.isActive ? classes.active : classes.item
+      }
+    >
+      {item}
+    </NavLink>
+  );
+
   return (
     <nav className={classes.Navbar}>
-      <div className={classes.item}>
-          <NavLink as={Link} to='/' className = { handlerActive => handlerActive.isActive ? classes.active : classes.item }>Profile</NavLink>
-      </div>
+      <div className={classes.item}>{onNavLink("/", "Profile")}</div>
 
-      <div className={classes.item}>
-          <NavLink as={Link} to='/messages' className = { handlerActive => handlerActive.isActive ? classes.active : classes.item }>Messages</NavLink>
-      </div>
+      <div className={classes.item}>{onNavLink("messages", "Messages")}</div>
 
-      <div className={classes.item}>
-          <NavLink as={Link} to='/news' className = { handlerActive => handlerActive.isActive ? classes.active : classes.item }>News</NavLink>
-      </div>
+      <div className={classes.item}>{onNavLink("users", "Users")}</div>
 
-      <div className={classes.item}>
-          <NavLink as={Link} to='/music' className = { handlerActive => handlerActive.isActive ? classes.active : classes.item }>Music</NavLink>
-      </div>
+      <div className={classes.item}>{onNavLink("news", "News")}</div>
 
-      <div className={classes.item}>
-          <NavLink as={Link} to='/settings' className = { handlerActive => handlerActive.isActive ? classes.active : classes.item }>Settings</NavLink>
-      </div>
+      <div className={classes.item}>{onNavLink("music", "Music")}</div>
+
+      <div className={classes.item}>{onNavLink("settings", "Settings")}</div>
 
       {/* <div>
         <h3 style={{textAlign: 'center'}}>Friends</h3>
@@ -38,9 +42,9 @@ export default function Navbar(props) {
           {/* <div style={{textAlign: 'center'}}>
             <img src='https://sun9-70.userapi.com/s/v1/if1/DsTwMZyt_QiogWfim4WOhvkmzhgwxLceTEu8nmZhehJm9o82o5O0xCaT_TLK7bMbM3iS0cKR.jpg?size=1440x2160&quality=96&type=album' alt=''/>
             Денис */}
-          {/* </div> */}
-        {/* </div> */}
+      {/* </div> */}
+      {/* </div> */}
       {/* </div> */}
     </nav>
-  )
+  );
 }

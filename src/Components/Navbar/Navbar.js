@@ -17,7 +17,7 @@ export default function Navbar(props) {
 
   return (
     <nav className={classes.Navbar}>
-      <div className={classes.item}>{onNavLink("/", "Profile")}</div>
+      <div className={classes.item}>{onNavLink("profile", "Profile")}</div>
 
       <div className={classes.item}>{onNavLink("messages", "Messages")}</div>
 

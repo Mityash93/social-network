@@ -1,9 +1,14 @@
 .Header {
-    grid-area: header;
-    background: rgb(250, 248, 248);
-    border-radius: 10px;
-  }
-  
-  .Header img {
-    width: 50px;
-  }
+  grid-area: header;
+  background: rgb(250, 248, 248);
+  border-radius: 10px;
+}
+
+.Header img {
+  width: 50px;
+}
+
+.loginBlock {
+  float: right;
+}
+

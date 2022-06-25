@@ -6,7 +6,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 export default function Content(props) {
   return (
     <div className={classes.Content}>
-      <ContentInfo />
+      <ContentInfo profile={props.profile} />
       <MyPostsContainer store={props.store} />
     </div>
   );

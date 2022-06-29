@@ -4,7 +4,6 @@ import classes from "./Dialogs.module.css";
 import Message from "./Message/Message";
 
 export default function Dialogs(props) {
-
   const state = props.MessagePage;
 
   const newMessageBody = state.newMessageBody;
@@ -16,6 +15,7 @@ export default function Dialogs(props) {
     const body = event.target.value;
     props.updateNewMessageBody(body);
   };
+
   return (
     <div className={classes.Dialogs}>
       <div className={classes.Dialog}>

@@ -1,7 +1,5 @@
-import axios from "axios";
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { usersAPI } from "../../api/api";
 import userPhoto from "../../assets/images/user.jpeg";
 import classes from "./Users.module.css";
 

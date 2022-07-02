@@ -1,19 +1,14 @@
 import React from "react";
 import DialogItem from "./DialogItem/DialogItem";
 import classes from "./Dialogs.module.css";
+import DialogsForm from "./DialogsForm";
 import Message from "./Message/Message";
 
 export default function Dialogs(props) {
   const state = props.MessagePage;
 
-  const newMessageBody = state.newMessageBody;
-
-  const onSendMessageClick = () => {
-    props.sendMessageCreator();
-  };
-  const onMessageChange = (event) => {
-    const body = event.target.value;
-    props.updateNewMessageBody(body);
+  const onSendMessageClick = (message) => {
+    props.sendMessageCreator(message);
   };
 
   return (
@@ -30,18 +25,7 @@ export default function Dialogs(props) {
             <Message key={message.id} message={message.message} />
           ))}
         </div>
-        <div>
-          <div>
-            <textarea
-              value={newMessageBody}
-              onChange={onMessageChange}
-              placeholder="Enter your message"
-            ></textarea>
-          </div>
-          <div>
-            <button onClick={onSendMessageClick}>Send</button>
-          </div>
-        </div>
+        <DialogsForm onSendMessageClick={onSendMessageClick} />
       </div>
     </div>
   );

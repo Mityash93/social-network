@@ -1,4 +1,3 @@
-const updateNewMessageBody = "UPDATE-NEW-MESSAGE-BODY";
 const sendMessage = "SEND-MESSAGE";
 
 const initialState = {
@@ -13,39 +12,26 @@ const initialState = {
     { id: 2, message: "What is happen?" },
     { id: 3, message: "How are u?" },
   ],
-  newMessageBody: "",
-}
+};
 
 const messageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case updateNewMessageBody:
-      return {
-        ...state, 
-        newMessageBody: action.body
-      }
     case sendMessage:
-      const body = state.newMessageBody;
       return {
         ...state,
-        Messages: [...state.Messages, { id: 4, message: body }],
-        newMessageBody: ""
-      }
-    
+        Messages: [...state.Messages, { id: 4, message: action.message }],
+      };
+
     default:
       return state;
   }
 };
 
-export const sendMessageCreator = () => {
-    return {
-      type: sendMessage,
-    };
+export const sendMessageCreator = (message) => {
+  return {
+    type: sendMessage,
+    message,
   };
-  export const updateNewMessageBodyCreator = (body) => {
-    return {
-      type: updateNewMessageBody,
-      body: body,
-    };
-  };
+};
 
 export default messageReducer;

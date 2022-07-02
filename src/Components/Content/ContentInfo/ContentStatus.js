@@ -24,6 +24,14 @@ class ContentStatus extends React.Component {
     });
   };
 
+  componentDidUpdate(prevProps, prevState){
+    if (prevProps.status !== this.props.status) {
+        this.setState({
+            status: this.state.status
+        })
+    }
+  }
+
   render() {
     return (
       <div>

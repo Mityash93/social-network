@@ -4,6 +4,7 @@ const addPost = "ADD-POST";
 const updateNewPostText = "UPDATE-NEW-POST-TEXT";
 const _setUserProfile = "SET-USER-PROFILE";
 const _setStatus = "SET-STATUS";
+const _setPhotoSuccess = "SET-PHOTO-SUCCESS";
 
 const initialState = {
   Posts: [
@@ -43,6 +44,11 @@ const postsReducer = (state = initialState, action) => {
         ...state,
         status: action.status,
       };
+    case _setPhotoSuccess:
+      return {
+        ...state,
+        profile: { ...state.profile, photos: action.photos },
+      };
     default:
       return state;
   }
@@ -71,6 +77,12 @@ const setStatus = (status) => {
     status,
   };
 };
+const setPhotoSuccess = (photos) => {
+  return {
+    type: _setPhotoSuccess,
+    photos,
+  };
+};
 export const getUserProfile = (userId) => (dispatch) => {
   return usersAPI.getContent(userId).then((response) => {
     dispatch(setUserProfile(response.data));
@@ -85,6 +97,13 @@ export const updateStatus = (status) => (dispatch) => {
   return contentAPI.updateStatus(status).then((response) => {
     if (response.data.resultCode === 0) {
       dispatch(setStatus(status));
+    }
+  });
+};
+export const savePhoto = (file) => (dispatch) => {
+  return contentAPI.savePhoto(file).then((response) => {
+    if (response.data.resultCode === 0) {
+      dispatch(setPhotoSuccess(response.data.data.photos));
     }
   });
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-export default function LoginForm(props) {
+export default function LoginForm({onSubmit}) {
   return (
     <Formik
       initialValues={{ email: "", password: "", rememberMe: false }}
@@ -17,12 +17,12 @@ export default function LoginForm(props) {
         return errors;
       }}
       onSubmit={(values) => {
-        props.onSubmit(values);
+        onSubmit(values);
       }}
     >
-      <Form>
-        {/* <div>{formik.status}</div> */}
 
+
+      <Form>
         <div>
           <Field type={"text"} name={"email"} placeholder={"e-mail"} />
         </div>

@@ -5,13 +5,14 @@ import {
   getUserProfile,
   getStatus,
   updateStatus,
+  savePhoto,
 } from "../../redux/postsReducer";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
 class ContentContainer extends React.Component {
-  componentDidMount() {
+  refreshContent() {
     let userId = this.props.router.params.userId;
     if (!userId) {
       userId = 2;
@@ -20,13 +21,25 @@ class ContentContainer extends React.Component {
     this.props.getStatus(userId);
   }
 
+  componentDidMount() {
+    this.refreshContent();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.router.params.userId !== prevProps.router.params.userId) {
+      this.refreshContent();
+    }
+  }
+
   render() {
     return (
       <Content
         {...this.props}
+        isOwner={!this.props.router.params.userId}
         profile={this.props.profile}
         status={this.props.status}
         updateStatus={this.props.updateStatus}
+        savePhoto={this.props.savePhoto}
       />
     );
   }
@@ -51,7 +64,12 @@ function withRouter(Component) {
 }
 
 export default compose(
-  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus }),
+  connect(mapStateToProps, {
+    getUserProfile,
+    getStatus,
+    updateStatus,
+    savePhoto,
+  }),
   withRouter,
   withAuthRedirect
 )(ContentContainer);

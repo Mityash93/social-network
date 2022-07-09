@@ -1,3 +1,4 @@
+import { postsType, profileType, photosType } from './../types/types';
 import { contentAPI, usersAPI } from "../api/api";
 
 const addPost = "ADD-POST";
@@ -6,17 +7,20 @@ const _setUserProfile = "SET-USER-PROFILE";
 const _setStatus = "SET-STATUS";
 const _setPhotoSuccess = "SET-PHOTO-SUCCESS";
 
+
 const initialState = {
   Posts: [
     { id: 1, message: "Hi progman", likesCount: 0 },
     { id: 2, message: "Hello marvelous", likesCount: 12 },
-  ],
-  NewPostText: "dima",
-  profile: null,
+  ] as Array<postsType>,
+  NewPostText: "",
+  profile: null as profileType | null,
   status: "",
-};
+}; 
 
-const postsReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+
+const postsReducer = (state = initialState, action: any): initialStateType => {
   switch (action.type) {
     case addPost:
       const newPost = {
@@ -54,53 +58,81 @@ const postsReducer = (state = initialState, action) => {
   }
 };
 
-export const addPostActionCreator = () => {
+type addPostActionCreatorType = {
+  type: typeof addPost
+}
+
+export const addPostActionCreator = (): addPostActionCreatorType => {
   return {
     type: addPost,
   };
 };
-export const updateNewTextActionCreator = (text) => {
+
+type updateNewTextActionCreatorType = {
+  type: typeof updateNewPostText,
+  newText: string
+}
+
+export const updateNewTextActionCreator = (text: string): updateNewTextActionCreatorType => {
   return {
     type: updateNewPostText,
     newText: text,
   };
 };
-const setUserProfile = (profile) => {
+
+type setUserProfileType = {
+  type: typeof _setUserProfile,
+  profile: profileType
+}
+
+const setUserProfile = (profile: profileType): setUserProfileType => {
   return {
     type: _setUserProfile,
     profile,
   };
 };
-const setStatus = (status) => {
+
+type setStatusType = {
+  type: typeof _setStatus,
+  status: string
+}
+
+const setStatus = (status: string): setStatusType => {
   return {
     type: _setStatus,
     status,
   };
 };
-const setPhotoSuccess = (photos) => {
+
+type setPhotoSuccessType = {
+  type: typeof _setPhotoSuccess,
+  photos: photosType
+}
+
+const setPhotoSuccess = (photos: photosType): setPhotoSuccessType => {
   return {
     type: _setPhotoSuccess,
     photos,
   };
 };
-export const getUserProfile = (userId) => (dispatch) => {
+export const getUserProfile = (userId: number) => (dispatch: any) => {
   return usersAPI.getContent(userId).then((response) => {
     dispatch(setUserProfile(response.data));
   });
 };
-export const getStatus = (userId) => (dispatch) => {
+export const getStatus = (userId: number) => (dispatch: any) => {
   return contentAPI.getStatus(userId).then((response) => {
     dispatch(setStatus(response.data));
   });
 };
-export const updateStatus = (status) => (dispatch) => {
+export const updateStatus = (status: string) => (dispatch: any) => {
   return contentAPI.updateStatus(status).then((response) => {
     if (response.data.resultCode === 0) {
       dispatch(setStatus(status));
     }
   });
 };
-export const savePhoto = (file) => (dispatch) => {
+export const savePhoto = (file: any) => (dispatch: any) => {
   return contentAPI.savePhoto(file).then((response) => {
     if (response.data.resultCode === 0) {
       dispatch(setPhotoSuccess(response.data.data.photos));

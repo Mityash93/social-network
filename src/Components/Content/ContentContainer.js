@@ -6,7 +6,7 @@ import {
   getStatus,
   updateStatus,
   savePhoto,
-} from "../../redux/postsReducer";
+} from "../../redux/postsReducer.ts";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import { compose } from "redux";

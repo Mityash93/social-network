@@ -1,15 +1,21 @@
 import React from "react";
-import { connect } from "react-redux";
 import LoginForm from "./LoginForm";
-import { login } from "../../redux/authReducer";
+import { login } from "../../redux/authReducer.ts";
 import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-function Login(props) {
+export const Login = () => {
+
+  const isAuth = useSelector(state => state.auth.isAuth);
+  const dispatch = useDispatch()
+
+
   const onSubmit = (values) => {
-    props.login(values.email, values.password, values.rememberMe);
+    dispatch(login(values.email, values.password, values.rememberMe));
   };
 
-  if (props.isAuth) {
+  if (isAuth) {
     return <Navigate to={"/profile"} />;
   }
   return (
@@ -20,10 +26,4 @@ function Login(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isAuth: state.auth.isAuth,
-  };
-};
 
-export default connect(mapStateToProps, { login })(Login);

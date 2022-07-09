@@ -3,13 +3,15 @@ import { authAPI } from "../api/api";
 const _setUserData = "SET-USER-DATA";
 
 const initialState = {
-  userId: null,
-  login: null,
-  email: null,
+  userId: null as number | null,
+  login: null as string | null,
+  email: null as string | null,
   isAuth: false,
 };
 
-const authReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+
+const authReducer = (state = initialState, action: any): initialStateType => {
   switch (action.type) {
     case _setUserData:
       return {
@@ -22,13 +24,25 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-const setAuthUserData = (userId, login, email, isAuth) => {
+type setAuthUserDataPayloadType = {
+  userId: number | null, 
+  login: string | null, 
+  email: string | null , 
+  isAuth: boolean
+}
+
+type setAuthUserDataType = {
+  type: typeof _setUserData,
+    payload: setAuthUserDataPayloadType,
+}
+
+const setAuthUserData = (userId: number | null, login: string | null, email: string | null, isAuth: boolean): setAuthUserDataType => {
   return {
     type: _setUserData,
     payload: { userId, login, email, isAuth },
   };
 };
-export const getAuthUserData = () => (dispatch) => {
+export const getAuthUserData = () => (dispatch: any) => {
   authAPI.me().then((response) => {
     if (response.data.resultCode === 0) {
       const { id, login, email } = response.data.data;
@@ -36,17 +50,14 @@ export const getAuthUserData = () => (dispatch) => {
     }
   });
 };
-export const login = (email, password, rememberMe) => (dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
   authAPI.login(email, password, rememberMe).then((response) => {
     if (response.data.resultCode === 0) {
       dispatch(getAuthUserData());
     }
-    //   else {
-    //     setStatus(response.data.messages)
-    // }
   });
 };
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch: any) => {
   return authAPI.logout().then((response) => {
     if (response.data.resultCode === 0) {
       dispatch(setAuthUserData(null, null, null, false));

@@ -1,11 +1,11 @@
 import { applyMiddleware, combineReducers, compose, legacy_createStore as createStore } from "redux";
-import authReducer from "./authReducer";
-import messageReducer from "./messageReducer";
-import navBarReducer from "./navBarReducer";
-import postsReducer from "./postsReducer";
-import usersReducer from "./usersReducer";
+import authReducer from "./authReducer.ts";
+import messageReducer from "./messageReducer.ts";
+import navBarReducer from "./navBarReducer.ts";
+import postsReducer from "./postsReducer.ts";
+import usersReducer from "./usersReducer.ts";
 import thunkMiddleware from "redux-thunk";
-import appReducer from "./appReducer";
+import appReducer from "./appReducer.ts";
 
 const reducers = combineReducers({
   MessagePage: messageReducer,
